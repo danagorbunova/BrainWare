@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Web.Entities
 {
@@ -9,6 +10,8 @@ namespace Web.Entities
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<Product> Products { get; set; }
+
+        IQueryable<OrderProduct> IAppDbContext.OrderProducts => OrderProducts;
 
         public AppDbContext()
         {

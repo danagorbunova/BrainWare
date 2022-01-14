@@ -21,11 +21,5 @@ namespace Tests.Controllers
             Assert.IsNotNull(result);
             Assert.AreEqual("Home Page", result.ViewBag.Title);
         }
-
-        [TestMethod]
-        public void Test()
-        {
-            Assert.IsTrue(true);
-        }
     }
 }

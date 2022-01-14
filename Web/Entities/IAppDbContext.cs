@@ -1,9 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System.Linq;
 
 namespace Web.Entities
 {
     public interface IAppDbContext
     {
-        DbSet<OrderProduct> OrderProducts { get; set; }
+        IQueryable<OrderProduct> OrderProducts { get; }
     }
 }
