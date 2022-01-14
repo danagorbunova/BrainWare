@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[orderproduct]
+﻿CREATE TABLE [dbo].[OrderProduct]
 (
 	[order_id] int NOT NULL,
 	[product_id] int NOT NULL,
