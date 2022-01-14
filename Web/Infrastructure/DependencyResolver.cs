@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 using Web.Controllers;
-using Web.Infrastructure;
+using Web.Entities;
 
 namespace Web
 {
@@ -18,7 +18,7 @@ namespace Web
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddScoped(t => new OrderService());
+            serviceCollection.AddScoped<IAppDbContext>(t => new AppDbContext());
             serviceCollection.AddScoped<OrderController>();
 
             return serviceCollection.BuildServiceProvider();

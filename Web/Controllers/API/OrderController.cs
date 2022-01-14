@@ -1,23 +1,34 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Http;
-using Web.Infrastructure;
-using Web.Models;
+using Web.Entities;
 
 namespace Web.Controllers
 {
     public class OrderController : ApiController
     {
-        private readonly OrderService _orderService;
+        private readonly IAppDbContext _appDbContext;
 
-        public OrderController(OrderService orderService)
+        public OrderController(IAppDbContext appDbContext)
         {
-            _orderService = orderService;
+            _appDbContext = appDbContext;
         }
 
         [HttpGet]
         public IEnumerable<Order> GetOrders(int id = 1)
         {
-            return _orderService.GetOrdersForCompany(id);
+            var orders = _appDbContext
+                .OrderProducts
+                .Where(t => t.Order.CompanyId == id)
+                .Include(t => t.Product)
+                .Include(t => t.Order)
+                .ToArray()
+                .Select(t => t.Order)
+                .Distinct()
+                .ToArray();
+
+            return orders;
         }
     }
 }
